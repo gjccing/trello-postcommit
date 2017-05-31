@@ -23,21 +23,11 @@ Automatically create comments on Trello, after a new git commit in bitbucket. Pl
 2. Drop the post-commit file into any or all of your repo's .git/hooks folder
 
 
-# How to Commit to Trello (2 Different Ways)
+# How to Commit to Trello
 
-In order for your commit message to automatically be posted to a Trello card, you will have to know that card's id. The current trello_commit supports two types of ids, the boardId/shortId or the shortLink. Just open up the card in your browser and take a look at the url.
+The way to post a commit message to Trello is to get the shortLink of the card. You can do it by opening the card and finding the More.. link. Clicking the More... link will show a popup that will have a field called Link to this card and a shortened url. If you just copy that url you can do a commit with that link instead of the first method.
 
-## Example 1 (The last two parts are the boardId/shortId):
-https://trello.com/card/name-of-card/5193b0b45b9811b7240036bf/68
-So your commit would look like this:
-
-````bash
-git commit -m "My comment message | 5193b0b45b9811b7240036bf/68"
-````
-
-The second way to post a commit message to Trello is to get the shortLink of the card. You can do it by opening the card and finding the More.. link. Clicking the More... link will show a popup that will have a field called Link to this card and a shortened url. If you just copy that url you can do a commit with that link instead of the first method.
-
-## Example 2
+## Example
 ````bash
 git commit -m "My comment message | https://trello.com/c/4Xdt2A6d" (Make sure to include the entire link)
 ````
