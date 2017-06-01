@@ -19,14 +19,16 @@ Promise.all([
     return url.replace(/\.git$/, url.indexOf('bitbucket') > -1 ? '/commits/' : '/commit/');
   }),
   new Promise((res, rej)=>exec(
-    `(cd ${process.argv[2]} && git log --pretty=format:"%H %s" ${process.argv[3]}..${process.argv[4]})`,
+    `(cd ${process.argv[2]} && git log --pretty=format:"%H %s" ` + 
+    (process.argv[3] != '0000000000000000000000000000000000000000'? process.argv[3] + '..' : '') +
+    `${process.argv[4]})`,
     (error, stdout)=>error ? rej(error) : res(stdout.trim())
   ))
 ]).then(([url, commits])=>{
   commits
     .split('\n')
     .reverse()
-    .filter(item=>item.search(/\|\s+https\:\/\/trello.com\/c\/\w+\s*$/) > -1)
+    .filter(item=>item.search(/\|\s+https\:\/\/trello.com\/c\/\w+\/?\s*$/) > -1)
     .map(item=>item.trim())
     .map(item=>
       [item.substr(0, 40)]
